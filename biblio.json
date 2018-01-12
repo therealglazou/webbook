@@ -1,0 +1,38 @@
+{
+  "ZIP": {
+           "href": "https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.3.TXT",
+           "title": ".ZIP File Format Specification 6.3.3",
+           "publisher": "PKWARE Inc."
+         },
+  "DPUB-ARIA-1.0": {
+           "authors": [ "Matt Garish", "Tzviya Siegmann", "Markus Gylling", "Shane McCarron" ],
+           "title": "Digital Publishing WAI-ARIA Module 1.0",
+           "publisher": "W3C",
+           "status": "REC",
+           "href": "https://www.w3.org/TR/dpub-aria-1.0/"
+         },
+  "EPUB301": {
+           "href": "http://www.idpf.org/epub/301/spec/epub-overview.html",
+           "title": "EPUB 3.0.1",
+           "publisher": "International Digital Publishing Forum",
+           "status": "Recommended Specification"
+         },
+  "EPUB-OCF301": {
+           "title": "EPUB Open Container Format (OCF) 3.0.1",
+           "href": "http://www.idpf.org/epub/301/spec/epub-ocf.html",
+           "publisher": "International Digital Publishing Forum",
+           "status": "Recommended Specification"
+         },
+  "EPUB-PUBLICATIONS301": {
+           "title": "EPUB Publications 3.0.1",
+           "href": "http://www.idpf.org/epub/301/spec/epub-publications.html",
+           "publisher": "International Digital Publishing Forum",
+           "status": "Recommended Specification"
+         },
+  "EPUB-CONTENTDOCS301": {
+           "title": "EPUB Content Documents 3.0.1",
+           "href": "http://www.idpf.org/epub/301/spec/epub-contentdocs.html",
+           "publisher": "International Digital Publishing Forum",
+           "status": "Recommended Specification"
+         }
+}

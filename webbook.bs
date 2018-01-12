@@ -1,0 +1,334 @@
+<pre class='metadata'>
+URL: http://glazman.org/e0/webbook.html
+!Repository: <a href="https://github.com/therealglazou/webbook">https://github.com/therealglazou/webbook</a>
+Title: WebBook Level 1
+Shortname: e0
+Level: 1
+Status: w3c/ud
+!Warning: WORK IN PROGRESS
+Boilerplate: repository-issue-tracking off
+!Author: Daniel Glazman, Disruptive Innovations
+No Editor: yes
+Abstract: WebBook is a new format for electronic books, based on Web Standards only, and meant to make such books readable inside a browser.
+</pre>
+
+Introduction {#intro}
+=====================
+
+<em>This section is informative.</em>
+
+The world of electronic books (ebooks) is very fragmented, technically
+speaking. The current electronic book formats, inheriting from
+multiple sources, are not readable inside a browser without a
+dedicated programmatic layer. Even if the ZIP package containing the
+electronic book is unzipped, finding and rendering the individual
+documents composing the book is not a task anyone can
+perform. Furthermore, most of these existing formats rely a lot on
+dedicated XML or even proprietary binary formats that raise many
+technical issues.
+
+The current document proposes the Level 1 of a new electronic book
+format, called WebBook, designed to free the electronic book market
+from its current industrial silo to make it become a real first-class
+client of the Web.
+
+## Requirements ## {#reqs}
+
+<em>This section is informative.</em>
+
+The following requirements are the basis for the technical choices in this specification:
+
+    1. one URL is enough to retrieve a remote WebBook instance, there is no need to download every resource composing that instance
+
+    2. the contents of a WebBook instance can be placed inside a Web site's directory and are directly readable by a Web browser using the URL for that directory
+
+    3. the contents of a WebBook instance can be placed inside a local directory and are directly readable by a Web browser opening its <code>index.html</code> or  <code>index.xhtml</code> topmost file
+
+    4. each individual resource in a WebBook instance, on a Web site or on a local disk, is directly readable by a Web browser
+
+    5. any html document can be used as content document inside a WebBook instance, without restriction
+
+    6. any stylesheet, replaced resource (images, audio, video, etc.) or additional resource useable by a html document (JavaScript, manifests, etc.) can be used inside the navigation document or the content documents of a WebBook instance, without restriction
+
+    7. the navigation document and the content documents inside a WebBook instance can be created and edited by any html editor
+
+    8. the metadata, table of contents contained in the navigation document of a WebBook instance can be created and edited by any html editor
+
+    9. the WebBook specification is backwards-compatible
+
+    10. the WebBook specification is forwards-compatible, at the potential cost of <em>graceful degradation</em> of some content
+
+    11. WebBook instances can be recognized without having to detect their MIME type
+
+    12. it's possible to deliver electronic books in a form that is compatible with both this specification and [[!EPUB301]]
+
+# WebBook instances  # {#instances}
+
+A WebBook instance is a [[ZIP]] container. All files in a WebBook
+instance MUST be stored as is (no compression) or using the Deflate
+algorithm. All file and directory names must be encoded in UTF-8
+[[!UNICODE]].  All File Names within the same directory must be unique
+following case normalization as described in section 3.13 of
+[[!UNICODE]]. All File Names within the same directory should be
+unique following NFC or NFD normalization [[!UAX15]].
+
+The file name of a WebBook instance SHOULD use the <code>wbook</code>
+file extension, unless [[#epub-compat|compatibility]] with
+[[!EPUB301]] is added; in that case, the <code>epub</code> file
+extension is recommended.  User Agents should always treat a zipped
+package with file extension <code>wbook</code> or <code>epub</code> or
+using the <a
+href="http://www.idpf.org/epub/301/spec/epub-ocf.html#app-media-type">EPUB
+Media Type</a> [[!EPUB-OCF301]] as a potential WebBook.
+
+A WebBook instance MUST contain a [[#navigation-document|navigation document]].
+
+A WebBook instance and each directory inside that WebBook instance can contain
+any number of files and directories. All files inside a WebBook instance
+SHOULD have a file extension to ensure all User Agents (including Web
+browsers) can render the file if necessary even if no HTTP header is
+present or if the User Agent cannot determine the type of the file
+from its contents.
+
+Inside a WebBook Level 1 instance, all internal references (links,
+references to replaced elements, etc.) SHOULD be strictly relative. With
+respect to section 4.2 of [[!RFC3986]], only
+<code>path-noscheme</code> and <code>path-empty</code> are allowed for
+IRIs' <code>relative-part</code>. References to resources external to
+the WebBook instance are not restricted.
+
+<div class='example'>
+<p>An example of Moby Dick packaged as a WebBook can be found <a
+href="http://glazman.org/e0/samples/">there.</a></p>
+</div>
+
+## The navigation document ## {#navigation-document}
+
+The navigation document MUST be a [[!html]] document named
+<code>index.html</code> if its serialization is HTML and
+<code>index.xhtml</code> if its serialization is XML. The navigation
+document MUST be placed inside the topmost directory inside the
+containing WebBook instance.
+
+The navigation document is a regular html document, intended to be
+rendered by a Web browser, that contains the following information:
+
+* metadata:
+    * a [[#content-document-title|title]] (optional)
+    * a [[#navigation-document-language|main language]] (optional)
+    * a [[#navigation-document-direction|progression direction]] (optional)
+    * a [[#navigation-document-identifier|unique identifier]] (optional)
+    * [[#navigation-document-other-metadata|other metadata]] (optional)
+- [[#navigation-document-navdata|navigation data]] (optional)
+- other html elements (optional)
+
+## The title ## {#content-document-title}
+
+The title of a WebBook instance represents the title of the electronic
+book and is the title a User Agent SHOULD present to users. The title
+of a WebBook instance is contained in the html <a
+href="https://html.spec.whatwg.org/multipage/semantics.html#the-title-element"><code>title</code></a>
+element of the WebBook instance's [[#navigation-document|navigation
+document]].
+
+<div class='example'>
+<pre>&lt;html lang="en">
+
+    &lt;head>
+      &lt;title>Moby-Dick&lt;/title>
+    &lt;/head>
+    ....
+  &lt/html>
+</pre>
+</div>
+If the navigation document has no <code>title</code> element, the
+title of the WebBook instance is the empty string.
+
+User agents should use the navigation document's title when referring
+to the containing WebBook in their user interface. When the contents
+of a <code>title</code> element are used in this way, the <a
+href="https://html.spec.whatwg.org/multipage/dom.html#the-directionality">directionality</a>
+of that <code>title</code> element should be used to set the
+directionality of the WebBook's title in the user interface.
+
+## The main language ## {#navigation-document-language}
+
+If the <a
+href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">root
+element</a> of the [[#navigation-document|navigation document]] of a
+given WebBook specifies a <a
+href="https://html.spec.whatwg.org/multipage/dom.html#attr-lang">primary
+language</a> for the navigation document, that language is also the
+primary language of that WebBook.
+
+## The progression direction ## {#navigation-document-direction}
+
+If the <a
+href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">root
+element</a> of the [[#navigation-document|navigation document]] of a
+given WebBook specifies a <a
+href="https://html.spec.whatwg.org/multipage/dom.html#the-dir-attribute">direction</a>
+for the navigation document, that direction is also the progression
+direction of that WebBook.
+
+If the root element of the navigation document has no drection but has
+a primary language, the progression direction of the WebBook should be
+inferred from the WebBook's main language.
+
+## The identifier ## {#navigation-document-identifier}
+
+A WebBook MAY contain a unique identifier (no other WebBook may have
+the same identifier; multiple instances of the same WebBook can have
+the same identifier), such as a UUID, DOI or ISBN.
+
+That identifier should be contained in a html element itself contained
+in the [[#navigation-document|navigation document]] and
+expressed using [[RDFA-PRIMER]], for example through the
+<code>property</code> and <code>vocab</code> attributes.
+
+<div class='example'>
+  <pre>&lt;span property="http://purl.org/dc/elements/1.1/identifier">
+
+  urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809
+&lt;/span></pre>
+</div>
+
+<div class='example'>
+  <pre>&lt;span vocab="http://purl.org/dc/elements/1.1/" property="identifier">
+
+  urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809
+&lt;/span></pre>
+</div>
+
+It's also possible to use the <a
+href="https://www.w3.org/TR/rdfa-primer/#using-the-content-attribute"><code>content</code></a>
+attribute on a html <a
+href="https://html.spec.whatwg.org/multipage/semantics.html#the-meta-element"><code>meta</code></a>
+element but that approach makes the property not easily editable in a
+Wysiwyg editor and is therefore strongly discouraged in the context of
+a WebBook.
+
+## Other metadata ## {#navigation-document-other-metadata}
+
+The [[#navigation-document|navigation document]] can contain any
+number of extra metadata, expressed through [[RDFA-PRIMER]], for
+example through the <code>property</code> and <code>vocab</code>
+attributes.
+
+It's also possible to use the <a
+href="https://www.w3.org/TR/rdfa-primer/#using-the-content-attribute"><code>content</code></a>
+attribute on a html <a
+href="https://html.spec.whatwg.org/multipage/semantics.html#the-meta-element"><code>meta</code></a>
+element but that approach makes the property not easily editable in a
+Wysiwyg editor and is therefore strongly discouraged in the context of
+a WebBook.
+
+<div class='example'>
+<pre>
+&lt;html lang="en">
+  &lt;head>
+    &lt;title>Moby-Dick&lt;/title>
+  &lt;/head>
+  &lt;body>
+    ...
+      &lt;span property="http://purl.org/dc/elements/1.1/identifier">
+        urn:isbn:9780316000000
+      &lt;/span>
+      ...
+      &lt;span property="http://purl.org/dc/terms/modified">
+        2012-01-13T01:13:00Z
+      &lt;/span>
+      ...
+      &lt;span property="http://purl.org/dc/terms/creator">
+        Herman Melville
+      &lt;/span>
+      ....
+      &lt;span property="http://purl.org/dc/terms/contributor">
+        Dave Cramer
+      &lt;/span>
+    ...
+  &lt;/body>
+&lt;/html>
+</pre>
+</div>
+
+## Navigation data ## {#navigation-document-navdata}
+
+A WebBook instance MAY contain no more than one collection of navigation data serving two purposes:
+
+    1. it specifies the Reading Order of the resources composing the WebBook
+
+    2. it specifies the Table of Contents of the WebBook
+
+A User Agent SHOULD render a WebBook without navigation data as an empty WebBook.
+
+If present, navigation data are a <a
+href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-nav-element"><code>nav</code></a>
+html element carrying the <a
+href="https://www.w3.org/TR/dpub-aria-1.0/#doc-toc"><code>doc-toc</code></a>
+role [[!DPUB-ARIA-1.0]] role and contained in the <code>body</code>
+element of the [[#navigation-document|navigation document]].
+
+The collection of all hyperlinks (<code>a</code> elements) inside
+navigation data, in document tree traversal order, specifies the
+Reading Order of all the resources composing the WebBook.
+
+The collection of all hyperlinks (<code>a</code> elements) inside
+navigation data having no <a
+href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor">inclusive
+ancestor</a> [[!DOM]] holding a html <a
+href="https://html.spec.whatwg.org/multipage/interaction.html#the-hidden-attribute">hidden</a>
+attribute, in document tree traversal order, specifies the Table of
+Contents of the WebBook.
+
+User Agents can use the Reading Order to render all its resources, for
+example, in one single paginated flow. User Agents can use the Table
+of Contents for example to provide the user with an ordered collection
+of resources he/she can directly navigate to on demand.
+
+<div class='example'>
+<pre>
+&lt;html lang="en">
+  &lt;head>
+    &lt;title>Moby-Dick&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;nav role="doc-toc">
+      &lt;ul>
+        &lt;li>&lt;a href="html/cover.html" hidden>Cover&lt;/a>&lt;/li>
+        &lt;li>&lt;a href="html/titlepage.html">Moby-Dick&lt;/a>&lt;/li>
+        &lt;li>&lt;a href="html/epigraph.html" hidden>EXTRACTS (Supplied by a Sub-Sub-Librarian)&lt;/a>.&lt;/li>
+        &lt;li>&lt;a href="html/chapter_001.html>Chapter 1. Loomings.&lt;/a>&lt;/li>
+        ...
+      &lt;/ul>
+    &lt;/nav>
+  &lt;/body>
+&lt;/html>
+</pre>
+</div>
+
+# Compatibility with EPUB 3.0.1 # {#epub-compat}
+
+<em>This section is informative.</em>
+
+It is easily possible to turn a valid [[!EPUB301]] package
+into a WebBook, retaining full compatibility with [[!EPUB301]], using
+the following instructions:
+
+    1. modify the EPUB package so its <a href="http://www.idpf.org/epub/301/spec/epub-contentdocs.html#sec-xhtml-nav">Navigation Document</a> [[!EPUB-CONTENTDOCS301]] is now:
+        1. named <code>index.xhtml</code>
+        2. placed inside the topmost directory of the package
+    2. update all links and references to extra resources inside the Navigation Document to reflect the new name and location of the file inside the package (if needed)
+    3. add the <code>role</code> attribute with value <code>doc-toc</code> to the <a href="http://www.idpf.org/epub/301/spec/epub-contentdocs.html#sec-xhtml-nav-def-types-toc"><code>toc nav</code></a> element of the Navigation Document
+    4. update the <a href="http://www.idpf.org/epub/301/spec/epub-publications.html#sec-item-elem">reference to the Navigation Document in the manifest of the Package Document</a> [[!EPUB-PUBLICATIONS301]] of the package to reflect the new name and location of the file inside the package (if needed)
+    5. update references to the Navigation Document inside other <a href="http://www.idpf.org/epub/301/spec/epub-contentdocs.html#sec-contentdocs">Content Documents</a> [[!EPUB-CONTENTDOCS301]] of the package to reflect the new name and location of the file inside the package (if needed)
+
+<div class='example'> <p>An example of Moby Dick packaged in conformance to both
+this specification and EPUB 3.0.1 can be found <a
+href="http://glazman.org/e0/samples/">there</a>.</p></div>
+
+# Acknowledgements # {#acks}
+
+The author would like to thank the following individuals for their
+invaluable contributions to this document throughout the numerous
+discussions he had with them: Dave Cramer, Florian Rivoal.
