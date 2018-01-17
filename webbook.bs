@@ -331,7 +331,7 @@ href="http://glazman.org/e0/samples/">there</a>.</p></div>
 
 <em>This section is informative.</em>
 
-    - <a href="https://github.com/therealglazou/epub3towebbook/blob/master/README.md">epub3towebbook</a>, a Node.js script to convert a EPUB3 package into a EPUB3-compatible WebBook
+    - <a href="https://github.com/therealglazou/epub3towebbook/">epub3towebbook</a>, a Node.js script to convert a EPUB3 package into a EPUB3-compatible WebBook
     - the next public version of <a href="http://bluegriffon.org">BlueGriffon</a> will create EPUB3-compatible WebBooks
 
 # Acknowledgements # {#acks}
