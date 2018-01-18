@@ -110,6 +110,9 @@ The navigation document MUST be a [[!html]] document named
 document MUST be placed inside the topmost directory inside the
 containing WebBook instance.
 
+If both <code>index.html</code> and <code>index.xhtml</code> are present in the WebBook instance,
+the User Agent must use <code>index.html</code> as the navigation document.
+
 The navigation document is a regular html document, intended to be
 rendered by a Web browser, that contains the following information:
 
