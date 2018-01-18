@@ -1178,7 +1178,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 2b79dbafbd71fe3f8f4e2b9171e40a0bd49a639c" name="generator">
   <link href="http://glazman.org/e0/webbook.html" rel="canonical">
-  <meta content="96138350b6978ffac249dedfd65eedc990b2d083" name="document-revision">
+  <meta content="8a0d2dd74acda7be78ccf194869929ca38ae3402" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1218,6 +1218,43 @@ figcaption {
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
 }</style>
+<style>/* style-dfn-panel */
+
+        .dfn-panel {
+            position: absolute;
+            z-index: 35;
+            height: auto;
+            width: -webkit-fit-content;
+            width: fit-content;
+            max-width: 300px;
+            max-height: 500px;
+            overflow: auto;
+            padding: 0.5em 0.75em;
+            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+            background: #DDDDDD;
+            color: black;
+            border: outset 0.2em;
+        }
+        .dfn-panel:not(.on) { display: none; }
+        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+        .dfn-panel > b { display: block; }
+        .dfn-panel a { color: black; }
+        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+        .dfn-panel > b + b { margin-top: 0.25em; }
+        .dfn-panel ul { padding: 0; }
+        .dfn-panel li { list-style: inside; }
+        .dfn-panel.activated {
+            display: inline-block;
+            position: fixed;
+            left: .5em;
+            bottom: 2em;
+            margin: 0 auto;
+            max-width: calc(100vw - 1.5em - .4em - .5em);
+            max-height: 30vh;
+        }
+
+        .dfn-paneled { cursor: pointer; }
+        </style>
 <style>/* style-selflinks */
 
 .heading, .issue, .note, .example, li, dt {
@@ -1330,7 +1367,7 @@ pre .property::before, pre .property::after {
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">WebBook Level 1</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Unofficial Proposal Draft, <time class="dt-updated" datetime="2018-01-17">17 January 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Unofficial Proposal Draft, <time class="dt-updated" datetime="2018-01-18">18 January 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1346,7 +1383,7 @@ pre .property::before, pre .property::after {
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 17 January 2018,
+In addition, as of 18 January 2018,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1380,6 +1417,12 @@ Parts of this work may be from another specification document.  If so, those par
     <li><a href="#known-implem"><span class="secno">4</span> <span class="content">Known implementations</span></a>
     <li><a href="#acks"><span class="secno">5</span> <span class="content">Acknowledgements</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
+     </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
@@ -1464,6 +1507,8 @@ the WebBook instance are not restricted.</p>
    <p>The navigation document MUST be a <a data-link-type="biblio" href="#biblio-html">[html]</a> document named <code>index.html</code> if its serialization is HTML and <code>index.xhtml</code> if its serialization is XML. The navigation
 document MUST be placed inside the topmost directory inside the
 containing WebBook instance.</p>
+   <p>If both <code>index.html</code> and <code>index.xhtml</code> are present in the WebBook instance,
+the User Agent must use <code>index.html</code> as the navigation document.</p>
    <p>The navigation document is a regular html document, intended to be
 rendered by a Web browser, that contains the following information:</p>
    <ul>
@@ -1489,7 +1534,7 @@ rendered by a Web browser, that contains the following information:</p>
    <h3 class="heading settled" data-level="2.2" id="content-document-title"><span class="secno">2.2. </span><span class="content">The title</span><a class="self-link" href="#content-document-title"></a></h3>
    <p>The title of a WebBook instance represents the title of the electronic
 book and is the title a User Agent SHOULD present to users. The title
-of a WebBook instance is contained in the html <a href="https://html.spec.whatwg.org/multipage/semantics.html#the-title-element"><code>title</code></a> element of the WebBook instance’s <a href="#navigation-document">navigation
+of a WebBook instance is contained in the html <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#the-title-element-2" id="ref-for-the-title-element-2">the title element</a> element of the WebBook instance’s <a href="#navigation-document">navigation
 document</a>.</p>
    <div class="example" id="example-ebee0104">
     <a class="self-link" href="#example-ebee0104"></a> 
@@ -1514,13 +1559,15 @@ given WebBook specifies a <a href="https://html.spec.whatwg.org/multipage/dom.ht
 language</a> for the navigation document, that language is also the
 primary language of that WebBook.</p>
    <h3 class="heading settled" data-level="2.4" id="navigation-document-direction"><span class="secno">2.4. </span><span class="content">The progression direction</span><a class="self-link" href="#navigation-document-direction"></a></h3>
-   <p>If the <a href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">root
-element</a> of the <a href="#navigation-document">navigation document</a> of a
-given WebBook specifies a <a href="https://html.spec.whatwg.org/multipage/dom.html#the-dir-attribute">direction</a> for the navigation document, that direction is also the progression
-direction of that WebBook.</p>
-   <p>If the root element of the navigation document has no drection but has
-a primary language, the progression direction of the WebBook should be
-inferred from the WebBook’s main language.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-for="WebBook" data-dfn-type="dfn" data-noexport="" id="webbook-principal-writing-mode">principal writing mode</dfn> of a WebBook is the same as
+the <a data-link-type="dfn" href="#webbook-principal-writing-mode" id="ref-for-webbook-principal-writing-mode">principal writing mode</a> of its navigation document,
+as specified in <a href="https://www.w3.org/TR/css-writing-modes-3/#principal-flow">CSS Writing Modes Level 3 §principal-flow</a>,
+and the <dfn class="dfn-paneled" data-dfn-for="WebBook" data-dfn-type="dfn" data-noexport="" id="webbook-page-progression">page progression</dfn> direction of a WebBook is the same as
+the <a data-link-type="dfn" href="#webbook-page-progression" id="ref-for-webbook-page-progression">page progression</a> direction of its navigation document,
+as specified in <a href="https://www.w3.org/TR/css-writing-modes-3/#page-direction">CSS Writing Modes Level 3 §page-direction</a> and <a href="https://www.w3.org/TR/css3-page/#progression">CSS Paged Media Module Level 3 §progression</a>.</p>
+   <p class="note" role="note"><span>Note:</span> The above implies that authors and authoring tools
+need to set the <a href="https://html.spec.whatwg.org/multipage/dom.html#the-dir-attribute"><code>dir</code></a> attribute to <code>"rtl"</code> on the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element" id="ref-for-the-html-element">html</a></code> or <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/sections.html#the-body-element" id="ref-for-the-body-element">body</a></code> element of the navigation document
+for WebBooks written in right-to-left languages and scripts to work properly.</p>
    <h3 class="heading settled" data-level="2.5" id="navigation-document-identifier"><span class="secno">2.5. </span><span class="content">The identifier</span><a class="self-link" href="#navigation-document-identifier"></a></h3>
    <p>A WebBook MAY contain a unique identifier (no other WebBook may have
 the same identifier; multiple instances of the same WebBook can have
@@ -1806,6 +1853,22 @@ discussions he had with them: Dave Cramer, Florian Rivoal.</p>
 
 })();
 </script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#webbook-page-progression">page progression</a><span>, in §2.4</span>
+   <li><a href="#webbook-principal-writing-mode">principal writing mode</a><span>, in §2.4</span>
+  </ul>
+  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="index">
+   <li>
+    <a data-link-type="biblio">[html]</a> defines the following terms:
+    <ul>
+     <li><a href="https://html.spec.whatwg.org/multipage/sections.html#the-body-element">body</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/dom.html#the-title-element-2">the title element</a>
+    </ul>
+  </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
@@ -1839,3 +1902,72 @@ discussions he had with them: Dave Cramer, Florian Rivoal.</p>
    <dt id="biblio-zip">[ZIP]
    <dd><a href="https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.3.TXT">.ZIP File Format Specification 6.3.3</a>. URL: <a href="https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.3.TXT">https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.3.TXT</a>
   </dl>
+  <aside class="dfn-panel" data-for="webbook-principal-writing-mode">
+   <b><a href="#webbook-principal-writing-mode">#webbook-principal-writing-mode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-webbook-principal-writing-mode">2.4. The progression direction</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="webbook-page-progression">
+   <b><a href="#webbook-page-progression">#webbook-page-progression</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-webbook-page-progression">2.4. The progression direction</a>
+   </ul>
+  </aside>
+<script>/* script-dfn-panel */
+
+        document.body.addEventListener("click", function(e) {
+            var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+            // Find the dfn element or panel, if any, that was clicked on.
+            var el = e.target;
+            var target;
+            var hitALink = false;
+            while(el.parentElement) {
+                if(el.tagName == "A") {
+                    // Clicking on a link in a <dfn> shouldn't summon the panel
+                    hitALink = true;
+                }
+                if(el.classList.contains("dfn-paneled")) {
+                    target = "dfn";
+                    break;
+                }
+                if(el.classList.contains("dfn-panel")) {
+                    target = "dfn-panel";
+                    break;
+                }
+                el = el.parentElement;
+            }
+            if(target != "dfn-panel") {
+                // Turn off any currently "on" or "activated" panels.
+                queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+                    el.classList.remove("on");
+                    el.classList.remove("activated");
+                });
+            }
+            if(target == "dfn" && !hitALink) {
+                // open the panel
+                var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+                if(dfnPanel) {
+                    console.log(dfnPanel);
+                    dfnPanel.classList.add("on");
+                    var rect = el.getBoundingClientRect();
+                    dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+                    dfnPanel.style.top = window.scrollY + rect.top + "px";
+                    var panelRect = dfnPanel.getBoundingClientRect();
+                    var panelWidth = panelRect.right - panelRect.left;
+                    if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                        // Reposition, because the panel is overflowing
+                        dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+                    }
+                } else {
+                    console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+                }
+            } else if(target == "dfn-panel") {
+                // Switch it to "activated" state, which pins it.
+                el.classList.add("activated");
+                el.style.left = null;
+                el.style.top = null;
+            }
+
+        });
+        </script>
