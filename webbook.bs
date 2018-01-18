@@ -171,17 +171,17 @@ primary language of that WebBook.
 
 ## The progression direction ## {#navigation-document-direction}
 
-If the <a
-href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">root
-element</a> of the [[#navigation-document|navigation document]] of a
-given WebBook specifies a <a
-href="https://html.spec.whatwg.org/multipage/dom.html#the-dir-attribute">direction</a>
-for the navigation document, that direction is also the progression
-direction of that WebBook.
+The <dfn for=WebBook>principal writing mode</dfn> of a WebBook is the same as
+the <a for="">principal writing mode</a> of its navigation document,
+as specified in [[CSS-WRITING-MODES-3#principal-flow]],
+and the <dfn for=WebBook>page progression</dfn> direction of a WebBook is the same as
+the <a for="">page progression</a> direction of its navigation document,
+as specified in [[CSS-WRITING-MODES-3#page-direction]] and [[CSS-PAGE-3#progression]].
 
-If the root element of the navigation document has no drection but has
-a primary language, the progression direction of the WebBook should be
-inferred from the WebBook's main language.
+Note: The above implies that authors and authoring tools
+need to set the <a href="https://html.spec.whatwg.org/multipage/dom.html#the-dir-attribute"><code>dir</code></a> attribute to <code>"rtl"</code>
+on the <{html}> or <{body}> element of the navigation document
+for WebBooks written in right-to-left languages and scripts to work properly.
 
 ## The identifier ## {#navigation-document-identifier}
 
