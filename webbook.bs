@@ -11,6 +11,12 @@ Boilerplate: repository-issue-tracking off
 No Editor: yes
 Abstract: WebBook is a new format for electronic books, based on Web Standards only, and meant to make such books readable inside a browser.
 </pre>
+<pre class="anchors">
+spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/;
+    urlPrefix: dom.html
+        type: dfn;
+            text: the title element; url: #the-title-element-2
+</pre>
 
 Introduction {#intro}
 =====================
@@ -129,8 +135,7 @@ rendered by a Web browser, that contains the following information:
 
 The title of a WebBook instance represents the title of the electronic
 book and is the title a User Agent SHOULD present to users. The title
-of a WebBook instance is contained in the html <a
-href="https://html.spec.whatwg.org/multipage/semantics.html#the-title-element"><code>title</code></a>
+of a WebBook instance is contained in the html <a>the title element</a>
 element of the WebBook instance's [[#navigation-document|navigation
 document]].
 
