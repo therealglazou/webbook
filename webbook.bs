@@ -288,18 +288,18 @@ attribute, in document tree traversal order, specifies the <dfn>Table of
 Contents</dfn> of the WebBook.
 
 If the <a>navigation document</a> does not have <a>navigation data</a>
-or if does have <a>navigation data</a> that contains no hyperlink
-(and therefore would define an empty <a>Reading order</a> and <a>Table of Content</a>)
-then the <a>Reading Order</a> and <a>Table of Content</a>
+or if it does have <a>navigation data</a> that contains no hyperlink
+(and therefore would define an empty <a>Reading order</a> and <a>Table of Contents</a>)
+then the <a>Reading Order</a> and <a>Table of Contents</a>
 are defined to contain the <a>navigation document</a>.
 
 <div class="note">
 Except in documents with no <a>navigation data</a> or an empty one,
-the <a>navigation document</a> is not included in the reading order,
+the <a>navigation document</a> is not included in the reading order by default,
 and WebBook-capable User Agents would skip it when displaying the book
 from the start.
 
-It is is possible to include the <a>navigation document</a> in the <a>Reading Order</a>
+It is is possible to include the <a>navigation document</a> into the <a>Reading Order</a>
 by having a link (possibly hidden) to it from the <a>navigation data</a>.
 
 <div class=example>
