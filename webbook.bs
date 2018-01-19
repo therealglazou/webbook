@@ -110,7 +110,7 @@ href="http://glazman.org/e0/samples/">there.</a></p>
 
 ## The navigation document ## {#navigation-document}
 
-The navigation document MUST be a [[!html]] document named
+The <dfn id=nav-doc>navigation document</dfn> MUST be a [[!html]] document named
 <code>index.html</code> if its serialization is HTML and
 <code>index.xhtml</code> if its serialization is XML. The navigation
 document MUST be placed inside the topmost directory inside the
@@ -268,9 +268,7 @@ A WebBook instance MAY contain no more than one collection of navigation data se
 
     2. it specifies the Table of Contents of the WebBook
 
-A User Agent SHOULD render a WebBook without navigation data as an empty WebBook.
-
-If present, navigation data are a <a
+If present, <dfn>navigation data</dfn> are a <a
 href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-nav-element"><code>nav</code></a>
 html element carrying the <a
 href="https://www.w3.org/TR/dpub-aria-1.0/#doc-toc"><code>doc-toc</code></a>
@@ -279,15 +277,60 @@ element of the [[#navigation-document|navigation document]].
 
 The collection of all hyperlinks (<code>a</code> elements) inside
 navigation data, in document tree traversal order, specifies the
-Reading Order of all the resources composing the WebBook.
+<dfn>Reading Order</dfn> of all the resources composing the WebBook.
 
 The collection of all hyperlinks (<code>a</code> elements) inside
 navigation data having no <a
 href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor">inclusive
 ancestor</a> [[!DOM]] holding a html <a
 href="https://html.spec.whatwg.org/multipage/interaction.html#the-hidden-attribute">hidden</a>
-attribute, in document tree traversal order, specifies the Table of
-Contents of the WebBook.
+attribute, in document tree traversal order, specifies the <dfn>Table of
+Contents</dfn> of the WebBook.
+
+If the <a>navigation document</a> does not have <a>navigation data</a>
+or if does have <a>navigation data</a> that contains no hyperlink
+(and therefore would define an empty <a>Reading order</a> and <a>Table of Content</a>)
+then the <a>Reading Order</a> and <a>Table of Content</a>
+are defined to contain the <a>navigation document</a>.
+
+<div class="note">
+Except in documents with no <a>navigation data</a> or an empty one,
+the <a>navigation document</a> is not included in the reading order,
+and WebBook-capable User Agents would skip it when displaying the book
+from the start.
+
+It is is possible to include the <a>navigation document</a> in the <a>Reading Order</a>
+by having a link (possibly hidden) to it from the <a>navigation data</a>.
+
+<div class=example>
+This contrived but fully functional and valid example
+shows a minimalist WebBook
+whose navigation document also serves as the
+first document in the reading order.
+
+<code>index.html</code>:
+<pre><code highlight=markup>
+&lt;!doctype html>
+&lt;html lang=en>
+&lt;meta charset=utf-8> &lt;meta name=viewport content="width=device-width">
+&lt;title>A Good Joke&lt;/title>
+&lt;nav role=doc-toc>
+&lt;h1>&lt;a href=#>A Good  Joke&lt;/a>&lt;/h1>
+  &lt;p>Why did the chicken cross the road?
+  &lt;p>&lt;a href="punchline.html">Punchline&lt;/a>
+&lt;/nav>
+</code></pre>
+
+<code>punchline.html</code>:
+<pre><code highlight=markup>
+&lt;!doctype html>
+&lt;html lang=en>
+&lt;meta charset=utf-8> &lt;meta name=viewport content="width=device-width">
+&lt;title>A Good Joke's Punchline&lt;/title>
+&lt;p>To get to the other side.
+</code></pre>
+</div>
+</div>
 
 User Agents can use the Reading Order to render all its resources, for
 example, in one single paginated flow. User Agents can use the Table
