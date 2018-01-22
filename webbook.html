@@ -1178,7 +1178,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 2b79dbafbd71fe3f8f4e2b9171e40a0bd49a639c" name="generator">
   <link href="http://glazman.org/e0/webbook.html" rel="canonical">
-  <meta content="cad11cac2b93127a96770d6b6ca9e6516397d9e3" name="document-revision">
+  <meta content="04e1d68bd9b7cb3412d757a3720f00f024153919" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1189,72 +1189,6 @@ Possible extra rowspan handling
 [data-md] > :last-child {
     margin-bottom: 0;
 }</style>
-<style>/* style-counters */
-
-body {
-    counter-reset: example figure issue;
-}
-.issue {
-    counter-increment: issue;
-}
-.issue:not(.no-marker)::before {
-    content: "Issue " counter(issue);
-}
-
-.example {
-    counter-increment: example;
-}
-.example:not(.no-marker)::before {
-    content: "Example " counter(example);
-}
-.invalid.example:not(.no-marker)::before,
-.illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
-}
-
-figcaption {
-    counter-increment: figure;
-}
-figcaption:not(.no-marker)::before {
-    content: "Figure " counter(figure) " ";
-}</style>
-<style>/* style-dfn-panel */
-
-        .dfn-panel {
-            position: absolute;
-            z-index: 35;
-            height: auto;
-            width: -webkit-fit-content;
-            width: fit-content;
-            max-width: 300px;
-            max-height: 500px;
-            overflow: auto;
-            padding: 0.5em 0.75em;
-            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-            background: #DDDDDD;
-            color: black;
-            border: outset 0.2em;
-        }
-        .dfn-panel:not(.on) { display: none; }
-        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-        .dfn-panel > b { display: block; }
-        .dfn-panel a { color: black; }
-        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-        .dfn-panel > b + b { margin-top: 0.25em; }
-        .dfn-panel ul { padding: 0; }
-        .dfn-panel li { list-style: inside; }
-        .dfn-panel.activated {
-            display: inline-block;
-            position: fixed;
-            left: .5em;
-            bottom: 2em;
-            margin: 0 auto;
-            max-width: calc(100vw - 1.5em - .4em - .5em);
-            max-height: 30vh;
-        }
-
-        .dfn-paneled { cursor: pointer; }
-        </style>
 <style>/* style-selflinks */
 
 .heading, .issue, .note, .example, li, dt {
@@ -1301,6 +1235,35 @@ dfn > a.self-link:hover {
 a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
 dfn > a.self-link::before      { content: "#"; }</style>
+<style>/* style-counters */
+
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
+
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
+
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1363,11 +1326,106 @@ pre .property::before, pre .property::after {
 [data-link-type=biblio] {
     white-space: pre;
 }</style>
+<style>/* style-dfn-panel */
+
+        .dfn-panel {
+            position: absolute;
+            z-index: 35;
+            height: auto;
+            width: -webkit-fit-content;
+            width: fit-content;
+            max-width: 300px;
+            max-height: 500px;
+            overflow: auto;
+            padding: 0.5em 0.75em;
+            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+            background: #DDDDDD;
+            color: black;
+            border: outset 0.2em;
+        }
+        .dfn-panel:not(.on) { display: none; }
+        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+        .dfn-panel > b { display: block; }
+        .dfn-panel a { color: black; }
+        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+        .dfn-panel > b + b { margin-top: 0.25em; }
+        .dfn-panel ul { padding: 0; }
+        .dfn-panel li { list-style: inside; }
+        .dfn-panel.activated {
+            display: inline-block;
+            position: fixed;
+            left: .5em;
+            bottom: 2em;
+            margin: 0 auto;
+            max-width: calc(100vw - 1.5em - .4em - .5em);
+            max-height: 30vh;
+        }
+
+        .dfn-paneled { cursor: pointer; }
+        </style>
+<style>/* style-syntax-highlighting */
+
+.highlight:not(.idl) { background: hsl(24, 20%, 95%); }
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+.highlight .c { color: #708090 } /* Comment */
+.highlight .k { color: #990055 } /* Keyword */
+.highlight .l { color: #000000 } /* Literal */
+.highlight .n { color: #0077aa } /* Name */
+.highlight .o { color: #999999 } /* Operator */
+.highlight .p { color: #999999 } /* Punctuation */
+.highlight .cm { color: #708090 } /* Comment.Multiline */
+.highlight .cp { color: #708090 } /* Comment.Preproc */
+.highlight .c1 { color: #708090 } /* Comment.Single */
+.highlight .cs { color: #708090 } /* Comment.Special */
+.highlight .kc { color: #990055 } /* Keyword.Constant */
+.highlight .kd { color: #990055 } /* Keyword.Declaration */
+.highlight .kn { color: #990055 } /* Keyword.Namespace */
+.highlight .kp { color: #990055 } /* Keyword.Pseudo */
+.highlight .kr { color: #990055 } /* Keyword.Reserved */
+.highlight .kt { color: #990055 } /* Keyword.Type */
+.highlight .ld { color: #000000 } /* Literal.Date */
+.highlight .m { color: #000000 } /* Literal.Number */
+.highlight .s { color: #a67f59 } /* Literal.String */
+.highlight .na { color: #0077aa } /* Name.Attribute */
+.highlight .nc { color: #0077aa } /* Name.Class */
+.highlight .no { color: #0077aa } /* Name.Constant */
+.highlight .nd { color: #0077aa } /* Name.Decorator */
+.highlight .ni { color: #0077aa } /* Name.Entity */
+.highlight .ne { color: #0077aa } /* Name.Exception */
+.highlight .nf { color: #0077aa } /* Name.Function */
+.highlight .nl { color: #0077aa } /* Name.Label */
+.highlight .nn { color: #0077aa } /* Name.Namespace */
+.highlight .py { color: #0077aa } /* Name.Property */
+.highlight .nt { color: #669900 } /* Name.Tag */
+.highlight .nv { color: #222222 } /* Name.Variable */
+.highlight .ow { color: #999999 } /* Operator.Word */
+.highlight .mb { color: #000000 } /* Literal.Number.Bin */
+.highlight .mf { color: #000000 } /* Literal.Number.Float */
+.highlight .mh { color: #000000 } /* Literal.Number.Hex */
+.highlight .mi { color: #000000 } /* Literal.Number.Integer */
+.highlight .mo { color: #000000 } /* Literal.Number.Oct */
+.highlight .sb { color: #a67f59 } /* Literal.String.Backtick */
+.highlight .sc { color: #a67f59 } /* Literal.String.Char */
+.highlight .sd { color: #a67f59 } /* Literal.String.Doc */
+.highlight .s2 { color: #a67f59 } /* Literal.String.Double */
+.highlight .se { color: #a67f59 } /* Literal.String.Escape */
+.highlight .sh { color: #a67f59 } /* Literal.String.Heredoc */
+.highlight .si { color: #a67f59 } /* Literal.String.Interpol */
+.highlight .sx { color: #a67f59 } /* Literal.String.Other */
+.highlight .sr { color: #a67f59 } /* Literal.String.Regex */
+.highlight .s1 { color: #a67f59 } /* Literal.String.Single */
+.highlight .ss { color: #a67f59 } /* Literal.String.Symbol */
+.highlight .vc { color: #0077aa } /* Name.Variable.Class */
+.highlight .vg { color: #0077aa } /* Name.Variable.Global */
+.highlight .vi { color: #0077aa } /* Name.Variable.Instance */
+.highlight .il { color: #000000 } /* Literal.Number.Integer.Long */
+</style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">WebBook Level 1</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Unofficial Proposal Draft, <time class="dt-updated" datetime="2018-01-18">18 January 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Unofficial Proposal Draft, <time class="dt-updated" datetime="2018-01-22">22 January 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1383,7 +1441,7 @@ pre .property::before, pre .property::after {
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 18 January 2018,
+In addition, as of 22 January 2018,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1504,7 +1562,7 @@ the WebBook instance are not restricted.</p>
     <p>An example of Moby Dick packaged as a WebBook can be found <a href="http://glazman.org/e0/samples/">there.</a></p>
    </div>
    <h3 class="heading settled" data-level="2.1" id="navigation-document"><span class="secno">2.1. </span><span class="content">The navigation document</span><a class="self-link" href="#navigation-document"></a></h3>
-   <p>The navigation document MUST be a <a data-link-type="biblio" href="#biblio-html">[html]</a> document named <code>index.html</code> if its serialization is HTML and <code>index.xhtml</code> if its serialization is XML. The navigation
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="nav-doc">navigation document</dfn> MUST be a <a data-link-type="biblio" href="#biblio-html">[html]</a> document named <code>index.html</code> if its serialization is HTML and <code>index.xhtml</code> if its serialization is XML. The navigation
 document MUST be placed inside the topmost directory inside the
 containing WebBook instance.</p>
    <p>If both <code>index.html</code> and <code>index.xhtml</code> are present in the WebBook instance,
@@ -1633,15 +1691,47 @@ a WebBook.</p>
     <li data-md="">
      <p>it specifies the Table of Contents of the WebBook</p>
    </ol>
-   <p>A User Agent SHOULD render a WebBook without navigation data as an empty WebBook.</p>
-   <p>If present, navigation data are a <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-nav-element"><code>nav</code></a> html element carrying the <a href="https://www.w3.org/TR/dpub-aria-1.0/#doc-toc"><code>doc-toc</code></a> role <a data-link-type="biblio" href="#biblio-dpub-aria-10">[DPUB-ARIA-1.0]</a> role and contained in the <code>body</code> element of the <a href="#navigation-document">navigation document</a>.</p>
+   <p>If present, <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="navigation-data">navigation data</dfn> are a <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-nav-element"><code>nav</code></a> html element carrying the <a href="https://www.w3.org/TR/dpub-aria-1.0/#doc-toc"><code>doc-toc</code></a> role <a data-link-type="biblio" href="#biblio-dpub-aria-10">[DPUB-ARIA-1.0]</a> role and contained in the <code>body</code> element of the <a href="#navigation-document">navigation document</a>.</p>
    <p>The collection of all hyperlinks (<code>a</code> elements) inside
-navigation data, in document tree traversal order, specifies the
-Reading Order of all the resources composing the WebBook.</p>
+navigation data, in document tree traversal order, specifies the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="reading-order">Reading Order</dfn> of all the resources composing the WebBook.</p>
    <p>The collection of all hyperlinks (<code>a</code> elements) inside
 navigation data having no <a href="https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor">inclusive
-ancestor</a> <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> holding a html <a href="https://html.spec.whatwg.org/multipage/interaction.html#the-hidden-attribute">hidden</a> attribute, in document tree traversal order, specifies the Table of
-Contents of the WebBook.</p>
+ancestor</a> <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> holding a html <a href="https://html.spec.whatwg.org/multipage/interaction.html#the-hidden-attribute">hidden</a> attribute, in document tree traversal order, specifies the <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="Table of Contents" data-noexport="" id="table-of-contents">Table of
+Contents</dfn> of the WebBook.</p>
+   <p>If the <a data-link-type="dfn" href="#nav-doc" id="ref-for-nav-doc">navigation document</a> does not have <a data-link-type="dfn" href="#navigation-data" id="ref-for-navigation-data">navigation data</a> or if it does have <a data-link-type="dfn" href="#navigation-data" id="ref-for-navigation-data①">navigation data</a> that contains no hyperlink
+(and therefore would define an empty <a data-link-type="dfn" href="#reading-order" id="ref-for-reading-order">Reading order</a> and <a data-link-type="dfn" href="#table-of-contents" id="ref-for-table-of-contents">Table of Contents</a>)
+then the <a data-link-type="dfn" href="#reading-order" id="ref-for-reading-order①">Reading Order</a> and <a data-link-type="dfn" href="#table-of-contents" id="ref-for-table-of-contents①">Table of Contents</a> are defined to contain the <a data-link-type="dfn" href="#nav-doc" id="ref-for-nav-doc①">navigation document</a>.</p>
+   <div class="note" role="note">
+     Except in documents with no <a data-link-type="dfn" href="#navigation-data" id="ref-for-navigation-data②">navigation data</a> or an empty one,
+the <a data-link-type="dfn" href="#nav-doc" id="ref-for-nav-doc②">navigation document</a> is not included in the reading order by default,
+and WebBook-capable User Agents would skip it when displaying the book
+from the start. 
+    <p>It is is possible to include the <a data-link-type="dfn" href="#nav-doc" id="ref-for-nav-doc③">navigation document</a> into the <a data-link-type="dfn" href="#reading-order" id="ref-for-reading-order②">Reading Order</a> by having a link (possibly hidden) to it from the <a data-link-type="dfn" href="#navigation-data" id="ref-for-navigation-data③">navigation data</a>.</p>
+    <div class="example" id="example-ff8aacf7">
+     <a class="self-link" href="#example-ff8aacf7"></a> This contrived but fully functional and valid example
+shows a minimalist WebBook
+whose navigation document also serves as the
+first document in the reading order. 
+     <p><code>index.html</code>:</p>
+<pre><code class="highlight"><span class="cp">&lt;!doctype html></span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">en</span><span class="p">></span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">utf-8</span><span class="p">></span> <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">viewport</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width"</span><span class="p">></span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">></span>A Good Joke<span class="p">&lt;/</span><span class="nt">title</span><span class="p">></span>
+<span class="p">&lt;</span><span class="nt">nav</span> <span class="na">role</span><span class="o">=</span><span class="s">doc-toc</span><span class="p">></span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">>&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">#</span><span class="p">></span>A Good  Joke<span class="p">&lt;/</span><span class="nt">a</span><span class="p">>&lt;/</span><span class="nt">h1</span><span class="p">></span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">></span>Why did the chicken cross the road?
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">>&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"punchline.html"</span><span class="p">></span>Punchline<span class="p">&lt;/</span><span class="nt">a</span><span class="p">></span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">></span>
+</code></pre>
+     <p><code>punchline.html</code>:</p>
+<pre><code class="highlight"><span class="cp">&lt;!doctype html></span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">en</span><span class="p">></span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">utf-8</span><span class="p">></span> <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">viewport</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width"</span><span class="p">></span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">></span>A Good Joke’s Punchline<span class="p">&lt;/</span><span class="nt">title</span><span class="p">></span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">></span>To get to the other side.
+</code></pre>
+    </div>
+   </div>
    <p>User Agents can use the Reading Order to render all its resources, for
 example, in one single paginated flow. User Agents can use the Table
 of Contents for example to provide the user with an ordered collection
@@ -1856,8 +1946,12 @@ discussions he had with them: Dave Cramer, Florian Rivoal.</p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
+   <li><a href="#navigation-data">navigation data</a><span>, in §2.7</span>
+   <li><a href="#nav-doc">navigation document</a><span>, in §2.1</span>
    <li><a href="#webbook-page-progression">page progression</a><span>, in §2.4</span>
    <li><a href="#webbook-principal-writing-mode">principal writing mode</a><span>, in §2.4</span>
+   <li><a href="#reading-order">Reading Order</a><span>, in §2.7</span>
+   <li><a href="#table-of-contents">Table of Contents</a><span>, in §2.7</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1902,6 +1996,12 @@ discussions he had with them: Dave Cramer, Florian Rivoal.</p>
    <dt id="biblio-zip">[ZIP]
    <dd><a href="https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.3.TXT">.ZIP File Format Specification 6.3.3</a>. URL: <a href="https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.3.TXT">https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.3.3.TXT</a>
   </dl>
+  <aside class="dfn-panel" data-for="nav-doc">
+   <b><a href="#nav-doc">#nav-doc</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-nav-doc">2.7. Navigation data</a> <a href="#ref-for-nav-doc①">(2)</a> <a href="#ref-for-nav-doc②">(3)</a> <a href="#ref-for-nav-doc③">(4)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="webbook-principal-writing-mode">
    <b><a href="#webbook-principal-writing-mode">#webbook-principal-writing-mode</a></b><b>Referenced in:</b>
    <ul>
@@ -1912,6 +2012,24 @@ discussions he had with them: Dave Cramer, Florian Rivoal.</p>
    <b><a href="#webbook-page-progression">#webbook-page-progression</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-webbook-page-progression">2.4. The progression direction</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="navigation-data">
+   <b><a href="#navigation-data">#navigation-data</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-navigation-data">2.7. Navigation data</a> <a href="#ref-for-navigation-data①">(2)</a> <a href="#ref-for-navigation-data②">(3)</a> <a href="#ref-for-navigation-data③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="reading-order">
+   <b><a href="#reading-order">#reading-order</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-reading-order">2.7. Navigation data</a> <a href="#ref-for-reading-order①">(2)</a> <a href="#ref-for-reading-order②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="table-of-contents">
+   <b><a href="#table-of-contents">#table-of-contents</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-table-of-contents">2.7. Navigation data</a> <a href="#ref-for-table-of-contents①">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
