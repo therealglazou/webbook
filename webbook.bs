@@ -370,11 +370,14 @@ Documents. Any file type or format accepted by <em>modern</em> Web rendering eng
 
 ### Content Document Navigation Hints ### {#content-navigation-hints}
 
-In the case of a html Content Document, it is recommended to add to
+In the case of a HTML (any version or serialization) Content Document,
+it is recommended to add to
 the <code>head</code> element of the document information about other
 <a>Content Documents</a> immediately reachable for the user from the current one.
 
-This is achieved through a <code>link</code> element having a <code>rel</code>
+This is achieved through a <code><a
+href="https://html.spec.whatwg.org/multipage/semantics.html#the-link-element">link</a></code>
+element having a <code><a href="https://html.spec.whatwg.org/multipage/semantics.html#attr-link-rel">rel</a></code>
 attribute specifying the relationship between the current document and the
 target of the link, and a <code>href</code> attribute holding a relative URL
 to the target <a>Content Document</a> in the WebBook instance.
@@ -427,9 +430,9 @@ of values</a> for that attribute in [[html]], the <a
 href="https://validator.w3.org/">html validator</a> does not refuse them.</div>
 
 <div class='example'>
-Examples:
-<pre>&lt;link rel="contents" href="../index.html">
-
+Examples of Navigation Hints in a Content Document:
+<pre>
+&lt;link rel="contents" href="../index.html">
 &lt;link rel="prev" href="chapter015.xhtml">
 &lt;link rel="next" href="chapter017.xhtml"></pre>
 </div>
