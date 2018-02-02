@@ -358,6 +358,86 @@ of resources he/she can directly navigate to on demand.
 </pre>
 </div>
 
+## Content Documents ## {#content-documents}
+
+A <dfn id="content-document">Content Document</dfn> is a file object, present in the
+WebBook instance and referenced from the <a>Navigation Data</a>, or the Navigation
+Document itself.
+
+This specification imposes no restriction on the type of Contents
+Documents. Any file type or format accepted by <em>modern</em> Web rendering engines
+(eg. images, videos, html, styled XML, SVG, etc.) can be a WebBook Content Document.
+
+### Content Document Navigation Hints ### {#content-navigation-hints}
+
+In the case of a html Content Document, it is recommended to add to
+the <code>head</code> element of the document information about other
+<a>Content Documents</a> immediately reachable for the user from the current one.
+
+This is achieved through a <code>link</code> element having a <code>rel</code>
+attribute specifying the relationship between the current document and the
+target of the link, and a <code>href</code> attribute holding a relative URL
+to the target <a>Content Document</a> in the WebBook instance.
+
+User Agents may use these links, if present, to offer navigation to target
+Content Documents from the rendering of a given html Content Document
+instead of relying on the <a>Navigation Data</a>.
+
+The following table lists the possible relationships:
+
+<table class="data">
+  <thead>
+    <tr>
+      <td><code>rel</code> value
+      <td>Relationship
+  </thead>
+  <tbody>
+    <tr>
+      <td>contents
+      <td>The target is the Navigation Document
+    <tr>
+      <td>next
+      <td>The target is the next Content Document in <a>Reading Order</a>
+    <tr>
+      <td>prev
+      <td>The target is the previous Content Document in <a>Reading Order</a>
+    <tr>
+      <td>index
+      <td>The target is a document providing an index for (at least) the current document.
+    <tr>
+      <td>glossary
+      <td>The target is a document providing a glossary of terms that pertain to (at least) the current document
+    <tr>
+      <td>start
+      <td>The target is the first document in the <a>Reading order</a>
+    <tr>
+      <td>end
+      <td>The target is the last document in the <a>Reading order</a>
+    <tr>
+      <td>bookmark
+      <td>The target is a document providing a list of bookmarks that pertain to (at least) the current document
+  </tbody>
+</table>
+
+<div class="note">Some of these values
+were originally introduced in [[HTML32]] or [[HTML401]] but were
+removed from the [[html]] specification. Although not present in the
+<a href="https://html.spec.whatwg.org/multipage/links.html#linkTypes">specified list
+of values</a> for that attribute in [[html]], the <a
+href="https://validator.w3.org/">html validator</a> does not refuse them.</div>
+
+<div class='example'>
+Examples:
+<pre>&lt;link rel="contents" href="../index.html">
+
+&lt;link rel="prev" href="chapter015.xhtml">
+&lt;link rel="next" href="chapter017.xhtml"></pre>
+</div>
+
+<div class="note">Please note the <code>rel</code> value for the previous
+Content Document in Reading Order is <code>prev</code> and not
+<code>previous</code></div>
+
 # Compatibility with EPUB 3.0.1 # {#epub-compat}
 
 <em>This section is informative.</em>
@@ -377,6 +457,34 @@ the following instructions:
 <div class='example'> <p>An example of Moby Dick packaged in conformance to both
 this specification and EPUB 3.0.1 can be found <a
 href="http://glazman.org/e0/samples/">there</a>.</p></div>
+
+# Frequently Asked Questions # {#faq}
+
+<em>This section is informative.</em>
+
+:   Why is there no <code>container.xml</code> file to be even more compatible with EPUB?
+::  In EPUB, the <code>container.xml</code> file is supposed to hold a list of existing <em>renditions</em>
+    in the EPUB package, but this never really worked: first, there are almost no EPUB packages containing
+    multiple renditions in the wild; second, and the former is probably a side-effect of the latter, the
+    EPUB specs say that EPUB Reading Systems <strong>must</strong> use the first OPF rendition available and nothing is
+    said about the other potential ones; third, the file must be, for historical reasons, contained in a
+    <code>META-INF</code> folder that does not make sense any more. Furthermore, that's one step too much to reach the metadata of
+    the document, contained in the OPF file. Even the EPUB version is not available there, only on the OPF.
+    All in all, the <code>container.xml</code> of EPUB is almost useless.
+    That's why WebBook has no <code>container.xml</code> file.
+:   What about the <a href="http://www.idpf.org/epub/renditions/multiple/">EPUB Multiple-Rendition Publications 1.0</a>
+    specification?
+::  That specification introduced a mechanism for User Agents to select a rendition based on
+    the characteristics of the reading device. As far as we can tell, it is not implemented. It could
+    have helped compatibility between EPUB2 and EPUB3 User Agents through the creation of EPUB
+    packages containing both a EPUB2 rendition and a EPUB3 rendition; that required to be able to
+    select a rendition based on its EPUB version. Unfortunately, it's not in the specification.
+:   No constraint on Content Documents?
+::  No. That's a design choice. At the notable exception of Amazon KF7/KF8, almost all EPUB Reading Systems
+    are based on the WebKit or the Blink rendering engines that accept all flavors of HTML, styled XML,
+    SVG and more. There is no reason to select a given flavor of html or even a serialization of html.
+
+<em>(to be extended)</em>
 
 # Known implementations # {#known-implem}
 
