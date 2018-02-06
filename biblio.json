@@ -34,5 +34,11 @@
            "href": "http://www.idpf.org/epub/301/spec/epub-contentdocs.html",
            "publisher": "International Digital Publishing Forum",
            "status": "Recommended Specification"
-         }
+         },
+  "HTML30": {
+           "title": "HyperText Markup Language Specification Version 3.0",
+           "href": "https://www.w3.org/MarkUp/html3/CoverPage.html",
+           "publisher": "IETF",
+           "status": "Expired Internet Draft"
+  }
 }
